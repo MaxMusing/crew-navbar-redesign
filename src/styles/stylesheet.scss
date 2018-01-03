@@ -27,26 +27,12 @@ $navbar-content-height: 2rem;
 	list-style-type: none;
 }
 
-.navbar-section {
-	display: flex;
-	height: $navbar-content-height;
-	align-items: center;
-}
-
-.navbar-section--primary {
-	margin-left: 0;
-}
-
-.navbar-section--secondary {
-	margin-left: auto;
-}
-
 .navbar-logo-link {
 	display: flex;
 	height: 100%;
-	padding: 1rem 1rem;
+	padding: 0.75rem 1rem;
 	margin-left: -1rem;
-	margin-right: 2rem;
+	margin-right: 1rem;
 	align-items: center;
 }
 
@@ -81,6 +67,10 @@ $text-color-hover: #0090ff;
 		transition: stroke 0.2s;
 		stroke: $text-color;
 	}
+}
+
+.navbar-item-push {
+	margin-left: auto;
 }
 
 .navbar-item--dropdown {
