@@ -19,16 +19,52 @@
   border-bottom: 1px solid #f5f5f5;
   list-style-type: none; }
 
-.navbar-item {
-  height: 2rem; }
+.navbar-section {
+  display: flex;
+  height: 2rem;
+  align-items: center; }
+
+.navbar-section--primary {
+  margin-left: 0; }
+
+.navbar-section--secondary {
+  margin-left: auto; }
 
 .navbar-logo-link {
   display: flex;
   height: 100%;
+  padding: 1rem 1rem;
+  margin-left: -1rem;
+  margin-right: 2rem;
   align-items: center; }
 
 .navbar-logo {
   height: 1.25rem; }
+
+.navbar-item {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-family: 'Roboto', sans-serif;
+  color: #777;
+  text-decoration: none;
+  transition: color 0.25s; }
+  .navbar-item:hover {
+    color: #0090ff; }
+    .navbar-item:hover svg {
+      stroke: #0090ff; }
+  .navbar-item svg {
+    width: 0.625rem;
+    height: 0.625rem;
+    margin-left: 0.125rem;
+    vertical-align: middle;
+    transition: stroke 0.2s;
+    stroke: #777; }
+
+.navbar-item--dropdown {
+  cursor: default; }
+
+.navbar-item--link {
+  cursor: pointer; }
 
 .main-page {
   height: calc(100vh - 6rem);

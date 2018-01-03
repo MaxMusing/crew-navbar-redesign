@@ -4,9 +4,9 @@
 	box-sizing: border-box;
 }
 
+$navbar-height-old: calc(6rem + 1px);
 $navbar-height: 6rem;
 $navbar-content-height: 2rem;
-$navbar-height-old: calc(6rem + 1px);
 
 .navbar {
 	position: fixed;
@@ -27,18 +27,68 @@ $navbar-height-old: calc(6rem + 1px);
 	list-style-type: none;
 }
 
-.navbar-item {
+.navbar-section {
+	display: flex;
 	height: $navbar-content-height;
+	align-items: center;
+}
+
+.navbar-section--primary {
+	margin-left: 0;
+}
+
+.navbar-section--secondary {
+	margin-left: auto;
 }
 
 .navbar-logo-link {
 	display: flex;
 	height: 100%;
+	padding: 1rem 1rem;
+	margin-left: -1rem;
+	margin-right: 2rem;
 	align-items: center;
 }
 
 .navbar-logo {
 	height: 1.25rem;
+}
+
+$text-color: #777;
+$text-color-hover: #0090ff;
+
+.navbar-item {
+	padding: 0.75rem 1rem;
+	font-size: 0.875rem;
+	font-family: 'Roboto', sans-serif;
+	color: $text-color;
+	text-decoration: none;
+	transition: color 0.25s;
+
+	&:hover {
+		color: $text-color-hover;
+
+		svg {
+			stroke: $text-color-hover;
+		}
+	}
+
+	svg {
+		width: 0.625rem;
+		height: 0.625rem;
+		margin-left: 0.125rem;
+		vertical-align: middle;
+		transition: stroke 0.2s;
+		stroke: $text-color;
+	}
+}
+
+.navbar-item--dropdown {
+	cursor: default;
+}
+
+.navbar-item--link {
+	cursor: pointer;
 }
 
 .main-page {
