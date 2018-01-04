@@ -15,7 +15,7 @@
   max-width: 75rem;
   height: 100%;
   margin: 0 auto;
-  padding: calc((5rem - 2rem) / 2) 3rem;
+  padding: calc((5rem - 3rem) / 2) 3rem;
   border-bottom: 1px solid rgba(87, 92, 96, 0.25);
   list-style-type: none; }
 
@@ -31,7 +31,9 @@
 
 .navbar-item {
   display: block;
-  padding: 0.75rem 1rem;
+  height: 3rem;
+  line-height: 3rem;
+  padding: 0 1rem;
   font-size: 0.875rem;
   font-weight: 500;
   font-family: 'Roboto', sans-serif;
@@ -61,18 +63,32 @@
 .navbar-item--link {
   cursor: pointer; }
 
-.navbar-dropdown {
-  display: none;
-  position: absolute;
+.navbar-dropdown-container {
+  display: flex;
   flex-direction: column;
+  align-items: center; }
+
+.navbar-dropdown {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-top: 3rem;
   padding: 1.5rem 1.5rem;
   background: #fff;
-  border: 1px solid #f5f5f5;
   border-radius: 0.375rem;
-  box-shadow: 0 1rem 2rem 0 rgba(102, 102, 102, 0.2);
-  list-style-type: none; }
+  box-shadow: 0 1rem 2.5rem 0 rgba(102, 102, 102, 0.25);
+  list-style-type: none;
+  transition: all 0.25s;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 0;
+  transform: perspective(10rem) rotateX(-5deg);
+  transform-origin: 50% 0; }
   .navbar-dropdown.active {
-    display: flex; }
+    visibility: visible;
+    opacity: 1;
+    z-index: 1;
+    transform: perspective(10rem) rotateX(0); }
 
 .navbar-dropdown-item {
   display: block;

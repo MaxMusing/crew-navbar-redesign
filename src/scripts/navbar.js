@@ -9,7 +9,7 @@ $('.navbar-dropdown').on('mouseover mouseleave focusin focusout', function() {
 
 function dropdownHovered($dropdown) {
 	return (
-		$dropdown.is(':hover') ||
+		($dropdown.is('.active') && $dropdown.is(':hover')) ||
 		$dropdown.siblings('.navbar-item--dropdown').is(':hover')
 	);
 }
