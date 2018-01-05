@@ -11,6 +11,10 @@
 	<body>
 		<header class="navbar" role="navigation">
 			<ul class="navbar-container" role="menubar">
+				<li role="menuitem">
+					<a href="#main-page" class="navbar-item navbar-item--link skip-to-content">Skip to main content</a>
+				</li>
+
 				<li class="navbar-item" role="menuitem">
 					<a href="https://crew.co" class="navbar-logo-link">
 						<img class="navbar-logo" src="images/logo.svg">
@@ -166,8 +170,8 @@
 			</ul>
 		</header>
 
-		<main class="main-page">
-			<iframe src="https://crew.co" class="main-page__content"></iframe>
+		<main id="main-page">
+			<iframe src="https://crew.co" class="main-page__content" tabindex="-1"></iframe>
 		</main>
 
 		<script src="scripts/navbar.js"></script>

@@ -86,6 +86,18 @@ $text-color-hover: #0090ff;
 	cursor: pointer;
 }
 
+.skip-to-content {
+	position: absolute;
+	top: -100%;
+	background: #fff;
+	z-index: 1;
+
+	&:focus,
+	&:active {
+		top: ($navbar-height - $navbar-content-height) / 2;
+	}
+}
+
 .navbar-dropdown-container {
 	display: flex;
 	flex-direction: column;
@@ -149,7 +161,7 @@ $text-color-hover: #0090ff;
 	}
 }
 
-.main-page {
+#main-page {
 	height: calc(100vh - #{$navbar-height});
 	margin-top: $navbar-height;
 	overflow: hidden;
