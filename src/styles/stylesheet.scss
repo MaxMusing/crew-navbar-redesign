@@ -1,3 +1,23 @@
+$desktop: 'desktop';
+$mobile: 'mobile';
+$breakpoint: 991px;
+
+@mixin breakpoint($point) {
+	@if $point == $desktop {
+		@media (min-width: $breakpoint) {
+			@content;
+		}
+	}
+	@else if $point == $mobile {
+		@media (max-width: $breakpoint), (max-device-width: $breakpoint) {
+			@content;
+		}
+	}
+	@else {
+		@warn "Invalid breakpoint";
+	}
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -6,6 +26,7 @@
 
 $navbar-height-old: calc(6rem + 1px);
 $navbar-height: 5rem;
+$navbar-height-mobile: 4rem;
 $navbar-content-height: 3rem;
 
 .navbar {
@@ -13,30 +34,107 @@ $navbar-content-height: 3rem;
 	top: 0;
 	width: 100%;
 	height: $navbar-height;
+
+	@include breakpoint($mobile) {
+		position: absolute;
+		height: $navbar-height-mobile;
+	}
 }
 
 .navbar-container {
 	display: flex;
+	list-style-type: none;
 	align-items: center;
 	max-width: 75rem;
 	height: 100%;
 	margin: 0 auto;
-	padding: calc((#{$navbar-height} - #{$navbar-content-height}) / 2) 3rem;
-
+	padding: calc((#{$navbar-height} - #{$navbar-content-height}) / 2) 2rem;
 	border-bottom: 1px solid rgba(87, 92, 96, .25);;
-	list-style-type: none;
+
+	@include breakpoint($mobile) {
+		padding: calc((#{$navbar-height-mobile} - #{$navbar-content-height}) / 2);
+	}
+}
+
+.skip-to-content {
+	position: absolute;
+	top: -100%;
+	background: #fff;
+	z-index: 1;
+
+	&:focus,
+	&:active {
+		top: ($navbar-height - $navbar-content-height) / 2;
+
+		@include breakpoint($mobile) {
+			top: ($navbar-height-mobile - $navbar-content-height) / 2;
+		}
+	}
 }
 
 .navbar-logo-link {
-	display: flex;
-	height: 100%;
+	display: inline-flex;
+	height: $navbar-content-height;
 	padding: 0.75rem 1rem;
-	margin-left: -1rem;
 	align-items: center;
 }
 
 .navbar-logo {
 	height: 1.25rem;
+}
+
+.navbar-content {
+	display: inline-flex;
+	height: 100%;
+}
+
+.navbar-content--desktop {
+	flex-grow: 1;
+
+	@include breakpoint($mobile) {
+		position: absolute;
+		width: calc(100% - 2rem);
+		height: auto;
+		top: 0;
+		left: 0;
+		margin: 1rem;
+		margin-top: $navbar-height;
+		padding: 1rem 1rem;
+
+		transition: all 0.25s;
+		visibility: hidden;
+		opacity: 0;
+		transform: perspective(10rem) scaleX(0.9) scaleY(0.9);
+		transform-origin: 100% 0;
+
+		background: #fff;
+		border-radius: 0.375rem;
+		box-shadow: 0 1rem 2.5rem 0 rgba(#666, 0.25);
+
+		&.active {
+			visibility: visible;
+			opacity: 1;
+			transform: perspective(10rem);
+		}
+	}
+}
+
+.navbar-content--mobile {
+	flex-grow: 1;
+
+	@include breakpoint($desktop) {
+		display: none;
+	}
+}
+
+.navbar-content-container {
+	display: flex;
+	width: 100%;
+	list-style-type: none;
+
+	@include breakpoint($mobile) {
+		flex-direction: column;
+	}
 }
 
 $text-color: #2a2a2a;
@@ -72,62 +170,68 @@ $text-color-hover: #0090ff;
 		stroke: $text-color;
 		fill: $text-color;
 	}
+
+	@include breakpoint($mobile) {
+		svg {
+			display: none;
+		}
+	}
 }
 
 .navbar-item-push {
-	margin-left: auto;
+	@include breakpoint($desktop) {
+		margin-left: auto;
+	}
 }
 
 .navbar-item--dropdown {
 	cursor: default;
+
+	@include breakpoint($mobile) {
+		display: none;
+	}
 }
 
 .navbar-item--link {
 	cursor: pointer;
 }
 
-.skip-to-content {
-	position: absolute;
-	top: -100%;
-	background: #fff;
-	z-index: 1;
-
-	&:focus,
-	&:active {
-		top: ($navbar-height - $navbar-content-height) / 2;
-	}
-}
-
 .navbar-dropdown-container {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+
+	@include breakpoint($desktop) {
+		align-items: center;
+	}
 }
 
 .navbar-dropdown {
 	display: flex;
 	flex-direction: column;
-	position: absolute;
-	margin-top: $navbar-content-height;
-	padding: 1.5rem 1.5rem;
-
-	background: #fff;
-	border-radius: 0.375rem;
-	box-shadow: 0 1rem 2.5rem 0 rgba(#666, 0.25);
 	list-style-type: none;
 
-	transition: all 0.25s;
-	visibility: hidden;
-	opacity: 0;
-	z-index: 0;
-	transform: perspective(10rem) rotateX(-5deg);
-	transform-origin: 50% 0;
+	@include breakpoint($desktop) {
+		margin-top: $navbar-content-height;
+		position: absolute;
+		padding: 1.5rem 1.5rem;
 
-	&.active {
-		visibility: visible;
-		opacity: 1;
-		z-index: 1;
-		transform: perspective(10rem) rotateX(0);
+		background: #fff;
+		border-radius: 0.375rem;
+		box-shadow: 0 1rem 2.5rem 0 rgba(#666, 0.25);
+
+		transition: all 0.25s;
+		visibility: hidden;
+		opacity: 0;
+		z-index: 0;
+		transform: perspective(10rem) rotateX(-5deg);
+		transform-origin: 50% 0;
+
+		&.active {
+			visibility: visible;
+			opacity: 1;
+			z-index: 1;
+			transform: perspective(10rem) rotateX(0);
+		}
 	}
 }
 
@@ -159,12 +263,56 @@ $text-color-hover: #0090ff;
 		stroke: $text-color;
 		fill: $text-color;
 	}
+
+	@include breakpoint($mobile) {
+		height: $navbar-content-height;
+		line-height: $navbar-content-height;
+		padding: 0 1rem;
+
+		svg {
+			display: none;
+		}
+	}
+}
+
+.hamburger-menu-button {
+	display: none;
+	width: $navbar-content-height;
+	margin-left: auto;
+	background: #fff;
+	border: none;
+	stroke: #000;
+	cursor: pointer;
+
+	svg {
+		width: 50%;
+		height: 50%;
+		transition: stroke 0.2s, fill 0.2s;
+		stroke: $text-color;
+		fill: $text-color;
+	}
+
+	&:hover {
+		svg {
+			stroke: $text-color-hover;
+			fill: $text-color-hover;
+		}
+	}
+
+	@include breakpoint($mobile) {
+		display: inline-block;
+	}
 }
 
 #main-page {
 	height: calc(100vh - #{$navbar-height});
 	margin-top: $navbar-height;
 	overflow: hidden;
+
+	@include breakpoint($mobile) {
+		height: calc(100vh - #{$navbar-height-mobile});
+	margin-top: $navbar-height-mobile;
+	}
 }
 
 .main-page__content {

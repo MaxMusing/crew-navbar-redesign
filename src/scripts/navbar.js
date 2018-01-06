@@ -1,9 +1,19 @@
-$('.navbar-item--dropdown').on('mouseover mouseleave focus blur', function() {
+$navbarContentDesktop = $('.navbar-content--desktop');
+$hamburgerMenuButton = $('.hamburger-menu-button');
+$navbarItemDropdown = $('.navbar-item--dropdown');
+$navbarDropdown = $('.navbar-dropdown');
+
+$hamburgerMenuButton.click(function() {
+	$navbarContentDesktop.toggleClass('active');
+	$navbarContentDesktop.attr('aria-hidden', !$('.navbar-content--desktop').hasClass('active'));
+});
+
+$navbarItemDropdown.on('mouseover mouseleave focus blur', function() {
 	const $dropdown = $(this).siblings('.navbar-dropdown');
 	updateDropdown($dropdown);
 });
 
-$('.navbar-dropdown').on('mouseover mouseleave focusin focusout', function() {
+$navbarDropdown.on('mouseover mouseleave focusin focusout', function() {
 	updateDropdown($(this));
 });
 
