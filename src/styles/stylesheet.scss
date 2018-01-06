@@ -276,31 +276,68 @@ $text-color-hover: #0090ff;
 }
 
 .hamburger-menu-button {
-	display: none;
+	position: relative;
+	display: inline-block;
 	width: $navbar-content-height;
 	margin-left: auto;
 	background: #fff;
 	border: none;
-	stroke: #000;
 	cursor: pointer;
 
-	svg {
-		width: 50%;
-		height: 50%;
-		transition: stroke 0.2s, fill 0.2s;
-		stroke: $text-color;
-		fill: $text-color;
+	span {
+		position: absolute;
+		display: block;
+		left: 20%;
+		height: 3px;
+		width: 60%;
+		background: $text-color;
+		border-radius: 3px;
+		opacity: 1;
+		transform: rotate(0);
+		transition: 0.2s ease-in-out;
 	}
 
-	&:hover {
-		svg {
-			stroke: $text-color-hover;
-			fill: $text-color-hover;
+	.line-top {
+		top: 30%;
+	}
+
+	.line-left,
+	.line-right {
+		top: 50%;
+	}
+
+	.line-bottom {
+		top: 70%;
+	}
+
+	&.active {
+		.line-top {
+			opacity: 0;
+			width: 0;
+			top: 50%;
+			left: 50%;
+		}
+
+		.line-left {
+			transform: rotate(45deg);
+		}
+
+		.line-right {
+			transform: rotate(-45deg);
+		}
+
+		.line-bottom {
+			opacity: 0;
+			width: 0;
+			top: 50%;
+			left: 50%;
 		}
 	}
 
-	@include breakpoint($mobile) {
-		display: inline-block;
+	&:hover {
+		span {
+			background: $text-color-hover;
+		}
 	}
 }
 

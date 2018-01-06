@@ -4,6 +4,7 @@ $navbarItemDropdown = $('.navbar-item--dropdown');
 $navbarDropdown = $('.navbar-dropdown');
 
 $hamburgerMenuButton.click(function() {
+	$hamburgerMenuButton.toggleClass('active');
 	$navbarContentDesktop.toggleClass('active');
 	$navbarContentDesktop.attr('aria-hidden', !$('.navbar-content--desktop').hasClass('active'));
 });
